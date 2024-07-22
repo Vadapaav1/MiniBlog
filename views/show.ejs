@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>miniBlog</title>
+    <!-- <link rel="stylesheet" href="/stylesheets/style.css"> -->
+   
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <style>
+        body {
+            background: url('/images/blog2.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .postcontainer {
+            max-width: 800px;
+            margin: auto;
+        }
+    </style> -->
+</head>
+<body>
+    <div class="w-full min-h-screen bg-zinc-900 text-white p-10">
+        <!-- <h3 class="text-3xl mb-5">Bloggle</h3> -->
+
+        <h3 class="text-3xl mb-8" style="font-family: 'Pacifico', cursive;">Bloggle <span>📚</span></h3>
+
+        
+        <% if (user) { %>
+        <!-- Display all posts -->
+        <div class="postcontainer mt-5">
+            <% posts.forEach(function(post){ %>
+                <div class="post w-full p-4 mb-4 rounded-md border-[1px] bg-zinc-800 border-zinc-700">
+                    <h4 class="text-blue-500 mb-2">@<%= post.user.username %></h4>
+                    <p class="text-sm tracking-tight"><%= post.content %></p>
+                    <small class="mt-2 inline-block"><%= post.likes.length %> <%= post.likes.length === 1 ? 'like' : 'likes' %></small>
+                    <div class="btns flex gap-4 mt-1">
+                        <a class="text-blue-500" href="/like/<%= post._id %>">
+                            <%= user && post.likes.includes(user._id) ? "Unlike" : "Like" %>
+                        </a>
+                        <% if (user && post.user.equals(user._id)) { %>
+                            <a class="text-zinc-600" href="/edit/<%= post._id %>">Edit</a>
+                        <% } %>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        <% } else { %>
+            <p>Please 
+                <a href="/register" style="background-color: rgb(227, 130, 50); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Register</a> 
+                or 
+                <a href="/login" style="background-color: rgb(227, 130, 50); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Login</a> 
+                to view posts.
+            </p>
+        <% } %>
+        
+    </div>
+
+    <script src="/javascripts/script.js"></script>
+</body>
+</html>
