@@ -206,7 +206,7 @@ app.post('/login', async (req, res) => {
 // Logout route - Clear cookie and redirect to login
 app.get('/logout', (req, res) => {
     res.clearCookie("token");
-    res.redirect("/login");
+    res.redirect("/");
 });
 
 // Start the server
